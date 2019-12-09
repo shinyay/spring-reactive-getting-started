@@ -34,4 +34,20 @@ class PersonController {
                     Person(10, "Name10", "Surname10", 100))
     ).delaySequence(Duration.ofMillis(1000))
             .doOnNext { person -> logger.info("Server Produces: $person") }
+
+    @GetMapping("/backpressure", produces = [MediaType.APPLICATION_STREAM_JSON_VALUE])
+    fun findPersonStreamBackPressure(): Flux<Person> = Flux.fromStream(
+            Stream.of(
+                    Person(1, "Name01", "Surname01", 11),
+                    Person(2, "Name02", "Surname02", 22),
+                    Person(3, "Name03", "Surname03", 33),
+                    Person(4, "Name04", "Surname04", 44),
+                    Person(5, "Name05", "Surname05", 55),
+                    Person(6, "Name06", "Surname06", 66),
+                    Person(7, "Name07", "Surname07", 77),
+                    Person(8, "Name08", "Surname08", 88),
+                    Person(9, "Name09", "Surname09", 99),
+                    Person(10, "Name10", "Surname10", 100))
+    ).delaySequence(Duration.ofMillis(100))
+            .doOnNext { person -> logger.info("Server Produces: $person") }
 }
