@@ -24,4 +24,6 @@ class EmployeeRepository {
                 "5" to "Emp5 Access Data"
         )
     }
+
+    fun findEmployeeById(id: String): Mono<Employee> = Mono.just(employeeData.getValue(id))
 }
