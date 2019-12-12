@@ -1,6 +1,6 @@
 package io.pivotal.shinyay
 
-import io.pivotal.shinyay.entity.Person
+import io.pivotal.shinyay.entity.Employee
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,7 +16,7 @@ class ReactiveGettingStartedApplicationTests {
 
 	@Test
 	fun testFindPersonBackPressure() {
-		var person: Flux<Person> = webClient.get().uri("/backpressure").retrieve().bodyToFlux(Person::class.java)
+		var person: Flux<Employee> = webClient.get().uri("/backpressure").retrieve().bodyToFlux(Employee::class.java)
 		person.map{Thread.sleep(90)}.subscribe { person -> logger.info("Client subscribes: $person") }
 	}
 
