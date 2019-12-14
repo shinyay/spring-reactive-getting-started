@@ -2,6 +2,7 @@ package io.pivotal.shinyay.repository
 
 import io.pivotal.shinyay.entity.Employee
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Repository
@@ -26,4 +27,6 @@ class EmployeeRepository {
     }
 
     fun findEmployeeById(id: String): Mono<Employee> = Mono.just(employeeData.getValue(id))
+
+    fun findAllEmployees(): Flux<Employee> = Flux.fromIterable(employeeData.values)
 }
