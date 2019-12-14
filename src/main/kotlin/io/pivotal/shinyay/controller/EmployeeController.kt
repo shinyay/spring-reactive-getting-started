@@ -15,4 +15,7 @@ class EmployeeController(val employeeRepository: EmployeeRepository) {
 
     @GetMapping("/{id}")
     fun getEmployeeById(@PathVariable id: String) = employeeRepository.findEmployeeById(id)
+
+    @GetMapping
+    fun getAllEmployees() = employeeRepository.findAllEmployees()
 }
