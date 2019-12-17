@@ -31,7 +31,7 @@ class EmployeeRepository {
     fun findAllEmployees(): Flux<Employee> = Flux.fromIterable(employeeData.values)
 
     fun updateEmployee(employee: Employee): Mono<Employee> {
-        val existingEmployee = employeeData.get(employee.id)
+        val existingEmployee = employeeData[employee.id]
         if(existingEmployee!=null) {
             existingEmployee.name = employee.name
         }
