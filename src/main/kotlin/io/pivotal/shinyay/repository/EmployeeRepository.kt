@@ -29,4 +29,12 @@ class EmployeeRepository {
     fun findEmployeeById(id: String): Mono<Employee> = Mono.just(employeeData.getValue(id))
 
     fun findAllEmployees(): Flux<Employee> = Flux.fromIterable(employeeData.values)
+
+    fun updateEmployee(employee: Employee): Mono<Employee> {
+        val existingEmployee = employeeData.get(employee.id)
+        if(existingEmployee!=null) {
+            existingEmployee.name = employee.name
+        }
+        return Mono.just(existingEmployee!!)
+    }
 }
