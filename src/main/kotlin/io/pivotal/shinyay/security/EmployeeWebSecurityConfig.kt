@@ -23,6 +23,16 @@ class EmployeeWebSecurityConfig {
 
     @Bean
     fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain? {
-
+        http
+                .csrf()
+                .disable()
+                .authorizeExchange()
+                .pathMatchers(HttpMethod.POST, "/employees/update")
+                .hasRole("ADMIN")
+                .pathMatchers("/**")
+                .permitAll()
+                .and()
+                .httpBasic()
+        return http.build()
     }
 }
